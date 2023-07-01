@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: vprodb
+  name: vprofiledb
   labels:
-    app: vprodb
+    app: vprofiledb
 spec:
   selector:
     matchLabels:
-      app: vprodb
+      app: vprofiledb
   replicas: 1
   template:
     metadata:
       labels:
-        app: vprodb
+        app: vprofiledb
     spec:
       containers:
-        - name: vprodb
+        - name: vprofiledb
           image: rahulrambo9/vprofiledb:latest
           volumeMounts:
             - mountPath: /var/lib/mysql
@@ -41,7 +41,7 @@ spec:
       initContainers:
         - name: busybox
           image: busybox:latest
-          args: ["rm", "rf", "/var/lib/mysql/lost-found"]
+          args: ["rm", "rf", "/var/lib/mysql/lost+found"]
           volumeMounts:
             - name: vprodb-data
               mountPath: /var/lib/mysql
